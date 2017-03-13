@@ -213,7 +213,9 @@ defmodule ExAdmin.Helpers do
     |> Enum.reverse
     |> Enum.join(", ")
   end
-  defp format_contents(contents), do: to_string(contents)
+  defp format_contents(contents) do
+    Phoenix.HTML.safe_to_string(Phoenix.HTML.Tag.content_tag(:span,to_string(contents)))
+  end
 
   def get_resource_model(resources) do
     case resources do
