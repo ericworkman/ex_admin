@@ -302,7 +302,7 @@ defmodule ExAdmin.Helpers do
       true ->
         case defn.name_column do
           nil -> get_name_column_field(resource)
-          name_field -> resource |> Map.get(name_field) |> to_string
+          name_field -> Phoenix.HTML.safe_to_string(Phoenix.HTML.Tag.content_tag(:span, resource |> Map.get(name_field) |> to_string))
         end
     end
   end
