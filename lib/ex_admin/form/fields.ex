@@ -38,6 +38,7 @@ defmodule ExAdmin.Form.Fields do
             []
         end
         map_relationship_fields(item, assoc_fields)
+        |> safe_content_tag()
         |> option([value: "#{item.id}"] ++ selected)
       end
     end
@@ -150,5 +151,9 @@ defmodule ExAdmin.Form.Fields do
         (gettext "Select %{nm}",nm: nm)
       other -> other
     end
+  end
+
+  defp safe_content_tag(contents) do
+    Phoenix.HTML.safe_to_string(Phoenix.HTML.Tag.content_tag(:span, contents))
   end
 end
